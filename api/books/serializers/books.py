@@ -5,7 +5,7 @@ from api.auth_user.serializers.author import AuthorSerializer
 from api.books.serializers.images import BookImagesSerializer
 
 
-class BookSerializer(serializers.ModelSerializer):
+class BooksSerializer(serializers.ModelSerializer):
     authors = AuthorSerializer(many=True)
     images = BookImagesSerializer(many=True)
 
@@ -30,4 +30,4 @@ class BookSerializer(serializers.ModelSerializer):
             'updated_at',
             'is_active'
         )
-        list_serializer_class = FilteredActiveListSerializer
+        # list_serializer_class = FilteredActiveListSerializer

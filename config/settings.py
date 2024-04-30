@@ -39,7 +39,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Application definition
 
 DEFAULT_APPS = [
-
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,14 +51,15 @@ DEFAULT_APPS = [
 LOCAL_APPS = [
     # local
     'apps.auth_user',
+    'apps.books',
 
 ]
 
 THIRD_APPS = [
     # lib
     'environs',
-    # 'corsheaders',
-    # 'rest_framework'
+    'corsheaders',
+    'rest_framework'
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_APPS
@@ -147,7 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ----------------------------------------------AUTHENTICATION----------------------------------------------------------
 # Custom user app defaults
 # Select the correct user model_object
-# AUTH_USER_MODEL = 'auth_user.User'
+AUTH_USER_MODEL = 'auth_user.User'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 

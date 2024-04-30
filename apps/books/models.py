@@ -5,8 +5,9 @@ from utils.models import SlugModel, BaseModel
 
 
 class BookManager(models.Manager):
-    def get_book_with_images(self):
-        return self.get_queryset().filter(image__isnull=False)
+
+    def book_with_images(self):
+        return self.get_queryset().filter(images__isnull=False).distinct()
 
 
 class BookImages(BaseModel):
@@ -27,8 +28,8 @@ class BookImages(BaseModel):
 
 class Books(SlugModel):
     images = models.ManyToManyField(BookImages,
-                                    on_delete=models.CASCADE,
-                                    null=True, blank=True,
+                                    related_name='books',
+                                    blank=True,
                                     verbose_name='Изображение')
     authors = models.ManyToManyField(Authors,
                                      verbose_name='Авторы')
@@ -46,6 +47,7 @@ class Books(SlugModel):
     def __str__(self):
         return self.name
 
+    # first_image property
     @property
     def first_image(self):
-        return getattr(self.images.first(), 'image.url', None)
+        return getattr(getattr(self.images.first(), 'image', None), 'url', None)
